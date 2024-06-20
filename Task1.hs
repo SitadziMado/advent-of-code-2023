@@ -10,16 +10,18 @@ indices needle = fmap (T.length . fst) . T.breakOnAll needle
 
 calibrationValue :: Text -> Int
 calibrationValue str = read [T.head digits, T.last digits]
-  where digits = T.filter isDigit str
+  where
+    digits = T.filter isDigit str
 
 calibrationValueWithWords :: Text -> Int
 calibrationValueWithWords t = read [head recons, last recons]
-  where digits = [T.pack . show $ idx | idx <- [1..9]]
-        wordsAsdigits = T.pack <$> ["one","two","three","four","five","six","seven","eight","nine"]
-        digitIndices = liftA2 indices digits [t]
-        wordIndices = liftA2 indices wordsAsdigits [t]
-        totalIndices = zipWith (++) digitIndices wordIndices
-        recons = snd <$> sort [(idx, head . show $ i) | (i, indexList) <- [1..] `zip` totalIndices, idx <- indexList]
+  where
+    digits = [T.pack . show $ idx | idx <- [1 .. 9]]
+    wordsAsdigits = T.pack <$> ["one", "two", "three", "four", "five", "six", "seven", "eight", "nine"]
+    digitIndices = liftA2 indices digits [t]
+    wordIndices = liftA2 indices wordsAsdigits [t]
+    totalIndices = zipWith (++) digitIndices wordIndices
+    recons = snd <$> sort [(idx, head . show $ i) | (i, indexList) <- [1 ..] `zip` totalIndices, idx <- indexList]
 
 main :: IO ()
 main = do
