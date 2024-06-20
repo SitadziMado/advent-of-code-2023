@@ -1,1 +1,1 @@
-ghc -odir ./build -hidir ./build -o ./build/Task1 ./Task1.hs
+ghc -odir ./build -hidir ./build -o "./build/$1" "./$1.hs"

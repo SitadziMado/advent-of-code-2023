@@ -1,3 +1,5 @@
+module Task1 where
+
 import Control.Applicative (liftA2)
 import Data.Char (isDigit)
 import Data.List (sort)
